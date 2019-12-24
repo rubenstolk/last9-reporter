@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <title>Last9 Report</title>
+  </head>
+  <body>
+    <section class="section">
+      <div class="container">
+        <h1 class="title">
+          Last9
+        </h1>
+        <p class="subtitle">
+          Daily Report
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        {% for block in blocks %}
+          {% if block.type === 'divider' %}
+        <hr />
+          {% elif block.type === 'section' %}
+        <div class="card">
+          <div class="card-content">
+            <div class="content">
+              {{ block.text.text | safe }}
+            </div>
+          </div>
+        </div>
+          {% elif block.type === 'context' %}
+            {% for element in block.elements %}
+        <article class="message is-info">
+          <div class="message-body">{{ element.text | safe }}</div>
+        </article>
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </section>
+
+  </body>
+</html>
